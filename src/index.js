@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Dimensions, StatusBar, NativeModules } from 'react-native';
-import Animated from 'react-native-reanimated';
+import Animated, { useCode } from 'react-native-reanimated';
 import { useMemoOne } from 'use-memo-one';
 
 import {
@@ -30,19 +30,22 @@ const INDICATOR_WIDTH = (SCREEN_WIDTH - 50) / 3;
 
 export default function Home() {
 
-    const [active, setActive] = useState(2);
-    const { Value, event, interpolate, Extrapolate, diffClamp, block, cond, lessThan, call, color, greaterThan, greaterOrEq, set, and } = Animated;
+    const AnimatedCameraIcon = Animated.createAnimatedComponent(CameraIcon);
 
-    const { scrollX, childScroll } = useMemoOne(() => ({
+    const [active, setActive] = useState(1);
+    const { Value, event, interpolate, Extrapolate, diffClamp, block, cond, lessOrEq, lessThan, call, color, greaterThan, greaterOrEq, set, and, eq } = Animated;
+
+    const { scrollX, childScroll, index } = useMemoOne(() => ({
         scrollX: new Value(0),
-        childScroll: new Value(0)
+        childScroll: new Value(0),
+        index: new Value(0)
     }), []);
 
     const scrollRef = useRef();
 
     const scrollGesture = event([
         {
-            nativeEvent: ({ contentOffset: { x } }) => 
+            nativeEvent: ({ contentOffset: { x } }) =>
                 set(scrollX, x)
         }
     ]);
@@ -77,18 +80,35 @@ export default function Home() {
         )
     ]);
 
-    function changeActive({ nativeEvent }) {
-        const { x } = nativeEvent.contentOffset;
-        if (x < 360) {
-            setActive(1);
-        } else if (x >= 360 && x < 720) {
-            setActive(2);
-        } else if (x >= 720 && x < 1080) {
-            setActive(3);
-        } else {
-            setActive(4);
-        }
-    }
+    const translateX = interpolate(scrollX, {
+        inputRange: [0, 360, SCREEN_WIDTH * 3],
+        outputRange: [0, 50, (SCREEN_WIDTH - INDICATOR_WIDTH)],
+        extrapolate: Extrapolate.CLAMP
+    });
+
+    const cameraTab = interpolate(translateX, {
+        inputRange: [20, 50, (SCREEN_WIDTH - INDICATOR_WIDTH * 2), (SCREEN_WIDTH - INDICATOR_WIDTH)],
+        outputRange: [1, .5, .5, .5],
+        extrapolate: Extrapolate.CLAMP
+    });
+
+    const firstTab = interpolate(translateX, {
+        inputRange: [0, 50, (SCREEN_WIDTH - INDICATOR_WIDTH * 2), (SCREEN_WIDTH - INDICATOR_WIDTH)],
+        outputRange: [.5, 1, .5, .5],
+        extrapolate: Extrapolate.CLAMP
+    });
+
+    const secondTab = interpolate(translateX, {
+        inputRange: [0, 50, (SCREEN_WIDTH - INDICATOR_WIDTH * 2), (SCREEN_WIDTH - INDICATOR_WIDTH)],
+        outputRange: [.5, .5, 1, .5],
+        extrapolate: Extrapolate.CLAMP
+    });
+
+    const thirdTab = interpolate(translateX, {
+        inputRange: [0, 50, (SCREEN_WIDTH - INDICATOR_WIDTH * 2), (SCREEN_WIDTH - INDICATOR_WIDTH)],
+        outputRange: [.5, .5, .5, 1],
+        extrapolate: Extrapolate.CLAMP
+    });
 
     return (
         <Container>
@@ -129,24 +149,46 @@ export default function Home() {
                     <CameraTab
                         onPress={() => scrollRef.current.getNode().scrollTo({ x: 0, y: 0, animated: true })}
                     >
-                        <CameraIcon active={active === 1 && true} />
+                        <AnimatedCameraIcon
+                            style={{
+                                opacity: cameraTab
+                            }}
+                        />
                     </CameraTab>
                     <Tab width={INDICATOR_WIDTH}
                         onPress={() => scrollRef.current.getNode().scrollTo({ x: SCREEN_WIDTH, y: 0, animated: true })}
                     >
-                        <Label active={active === 2 && true}>CONVERSAS</Label>
+                        <Label
+                            style={{
+                                opacity: firstTab
+                            }}
+                        >
+                            CONVERSAS
+                        </Label>
                     </Tab>
                     <Tab
                         width={INDICATOR_WIDTH}
                         onPress={() => scrollRef.current.getNode().scrollTo({ x: SCREEN_WIDTH * 2, y: 0, animated: true })}
                     >
-                        <Label active={active === 3 && true}>STATUS</Label>
+                        <Label
+                            style={{
+                                opacity: secondTab
+                            }}
+                        >
+                            STATUS
+                        </Label>
                     </Tab>
                     <Tab
                         width={INDICATOR_WIDTH}
                         onPress={() => scrollRef.current.getNode().scrollTo({ x: SCREEN_WIDTH * 3, y: 0, animated: true })}
                     >
-                        <Label active={active === 4 && true}>CHAMADAS</Label>
+                        <Label
+                            style={{
+                                opacity: thirdTab
+                            }}
+                        >
+                            CHAMADA
+                        </Label>
                     </Tab>
                     <Line
                         style={{
@@ -157,11 +199,7 @@ export default function Home() {
                             }),
                             transform: [
                                 {
-                                    translateX: interpolate(scrollX, {
-                                        inputRange: [0, 360, SCREEN_WIDTH * 3],
-                                        outputRange: [0, 50, (SCREEN_WIDTH - INDICATOR_WIDTH)],
-                                        extrapolate: Extrapolate.CLAMP
-                                    })
+                                    translateX
                                 }
                             ]
                         }}

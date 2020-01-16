@@ -92,10 +92,9 @@ export const CameraIcon = styled(Icon).attrs({
 })`
     font-size: 28px;
     color: white;
-    opacity: ${({ active }) => active ? 1 : .5};
 `;
 
-export const Label = styled.Text`
+export const Label = styled(Animated.Text)`
     color: white;
     font-weight: bold;
     font-size: 14px;
