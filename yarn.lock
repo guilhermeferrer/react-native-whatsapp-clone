@@ -1102,6 +1102,11 @@ abort-controller@^3.0.0:
   dependencies:
     event-target-shim "^5.0.0"
 
+abs-svg-path@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/abs-svg-path/-/abs-svg-path-0.1.1.tgz#df601c8e8d2ba10d4a76d625e236a9a39c2723bf"
+  integrity sha1-32Acjo0roQ1KdtYl4japo5wnI78=
+
 absolute-path@^0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/absolute-path/-/absolute-path-0.0.0.tgz#a78762fbdadfb5297be99b15d35a785b2f095bf7"
@@ -2900,6 +2905,11 @@ growly@^1.3.0:
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
   integrity sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
 
+hammerjs@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/hammerjs/-/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
+  integrity sha1-BO93hiz/K7edMPdpIJWTAiK/YPE=
+
 har-schema@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/har-schema/-/har-schema-2.0.0.tgz#a94c2224ebcac04782a0d9035521f24735b7ec92"
@@ -2965,6 +2975,11 @@ hermes-engine@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/hermes-engine/-/hermes-engine-0.2.1.tgz#25c0f1ff852512a92cb5c5cc47cf967e1e722ea2"
   integrity sha512-eNHUQHuadDMJARpaqvlCZoK/Nitpj6oywq3vQ3wCwEsww5morX34mW5PmKWQTO7aU0ck0hgulxR+EVDlXygGxQ==
+
+hoist-non-react-statics@^2.3.1:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
+  integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
 
 hoist-non-react-statics@^3.0.0:
   version "3.3.1"
@@ -4563,6 +4578,13 @@ normalize-path@^2.1.1:
   dependencies:
     remove-trailing-separator "^1.0.1"
 
+normalize-svg-path@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/normalize-svg-path/-/normalize-svg-path-1.0.1.tgz#6f729ad6b70bb4ca4eff2fe4b107489efe1d56fe"
+  integrity sha1-b3Ka1rcLtMpO/y/ksQdInv4dVv4=
+  dependencies:
+    svg-arc-to-cubic-bezier "^3.0.0"
+
 npm-run-path@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
@@ -4872,6 +4894,11 @@ parse-node-version@^1.0.0:
   resolved "https://registry.yarnpkg.com/parse-node-version/-/parse-node-version-1.0.1.tgz#e2b5dbede00e7fa9bc363607f53327e8b073189b"
   integrity sha512-3YHlOa/JgH6Mnpr05jP9eDG254US9ek25LyIxZlDItp2iJtwyaXQb57lBYLdT3MowkUFYEV2XXNAYIPlESvJlA==
 
+parse-svg-path@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/parse-svg-path/-/parse-svg-path-0.1.2.tgz#7a7ec0d1eb06fa5325c7d3e009b859a09b5d49eb"
+  integrity sha1-en7A0esG+lMlx9PgCbhZoJtdSes=
+
 parse5@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-4.0.0.tgz#6d78656e3da8d78b4ec0b906f7c08ef1dfe3f608"
@@ -5112,6 +5139,16 @@ react-native-camera@^3.15.1:
   dependencies:
     prop-types "^15.6.2"
 
+react-native-gesture-handler@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.5.3.tgz#191b44701fab7ba54c27a2438cb5eaa252666e66"
+  integrity sha512-y2/jw0uHAQtEPR02PHAah6tdMymrVtZFoHqjlEWdhK807w2sgU5CySYINK/nOTczd+zB4GMX+9euA3VfbGJ5aA==
+  dependencies:
+    hammerjs "^2.0.8"
+    hoist-non-react-statics "^2.3.1"
+    invariant "^2.2.4"
+    prop-types "^15.7.2"
+
 react-native-platform-touchable@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-native-platform-touchable/-/react-native-platform-touchable-1.1.1.tgz#fde4acc65eea585d28b164d0c3716a42129a68e4"
@@ -5121,6 +5158,16 @@ react-native-reanimated@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.5.0.tgz#9b9e0d4d0658276a2ac7493e0b283b881a517267"
   integrity sha512-p6zYKIpLaL/1Y7P9sIG/Ut/Vlm7LU4Mxax/CV8VHG1YSHH7qbdLzJ3XfUMAyKJaeapclSl+fYE9vS6EG3xM45g==
+
+react-native-redash@^9.6.0:
+  version "9.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-redash/-/react-native-redash-9.6.0.tgz#4fde2075c52b2dd0646436d50a326fd9989f4393"
+  integrity sha512-0Q0YppSQQ7LJlYcSzb2GGYtKvZFVOfzYeJc/cE1smXNisXyanFmFLrWZ1L4OuZyCas+cl3nELYeQi55ys3h6bg==
+  dependencies:
+    abs-svg-path "^0.1.1"
+    normalize-svg-path "^1.0.1"
+    parse-svg-path "^0.1.2"
+    use-memo-one "^1.1.1"
 
 react-native-vector-icons@^6.6.0:
   version "6.6.0"
@@ -5988,6 +6035,11 @@ supports-color@^6.1.0:
   integrity sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ==
   dependencies:
     has-flag "^3.0.0"
+
+svg-arc-to-cubic-bezier@^3.0.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/svg-arc-to-cubic-bezier/-/svg-arc-to-cubic-bezier-3.2.0.tgz#390c450035ae1c4a0104d90650304c3bc814abe6"
+  integrity sha512-djbJ/vZKZO+gPoSDThGNpKDO+o+bAeA4XQKovvkNCqnIS2t+S4qnLAGQhyyrulhCFRl1WWzAp0wUDV8PpTVU3g==
 
 symbol-observable@1.0.1:
   version "1.0.1"

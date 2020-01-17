@@ -18,30 +18,43 @@ import {
     CameraIcon,
     Line,
     Page,
-    Bar
+    Bar,
+    Overlay,
+    Touggle
 } from './styles';
 
 import Camera from './pages/Camera';
 import Conversations from './pages/Conversations';
+import { setState } from 'expect/build/jestMatchersObject';
 
 const { StatusBarManager: { HEIGHT } } = NativeModules;
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const INDICATOR_WIDTH = (SCREEN_WIDTH - 50) / 3;
 
 export default function Home() {
 
     const AnimatedCameraIcon = Animated.createAnimatedComponent(CameraIcon);
 
-    const [active, setActive] = useState(1);
     const { Value, event, interpolate, Extrapolate, diffClamp, block, cond, lessOrEq, lessThan, call, color, greaterThan, greaterOrEq, set, and, eq } = Animated;
 
-    const { scrollX, childScroll, index } = useMemoOne(() => ({
+    const { scrollX, childScroll } = useMemoOne(() => ({
         scrollX: new Value(0),
-        childScroll: new Value(0),
-        index: new Value(0)
+        childScroll: new Value(0)
     }), []);
 
+    const opacity = new Value(0);
+
     const scrollRef = useRef();
+
+    const width = interpolate(opacity, {
+        inputRange: [0, 0.2],
+        outputRange: [0, SCREEN_WIDTH]
+    });
+
+    const height = interpolate(opacity, {
+        inputRange: [0, 0.2],
+        outputRange: [0, SCREEN_HEIGHT]
+    });
 
     const scrollGesture = event([
         {
@@ -124,7 +137,7 @@ export default function Home() {
             >
                 <Camera />
                 <Conversations
-                    childScrollGesture={childScrollGesture}
+                    {...{ childScrollGesture, childScroll, opacity }}
                 />
                 <Page />
                 <Page />
@@ -220,6 +233,15 @@ export default function Home() {
                     }))
                 }}
             />
+            <Overlay>
+                <Touggle
+                    style={{
+                        opacity,
+                        width,
+                        height
+                    }}
+                />
+            </Overlay>
             <StatusBar backgroundColor={'transparent'} translucent />
         </Container>
     );

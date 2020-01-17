@@ -20,7 +20,7 @@ export const Bar = styled(Animated.View)`
 export const Container = styled.View`
     flex: 1;
     min-width: ${width}px;
-    min-height: ${height+HEIGHT}px;
+    min-height: ${height + HEIGHT}px;
 `;
 
 export const Header = styled(Animated.View)`
@@ -113,4 +113,13 @@ export const Page = styled.View`
     width: ${Dimensions.get('window').width}px;
     height: ${Dimensions.get('window').height}px;
     background-color: ${({ index }) => index === 2 ? 'blue' : 'red'};
+`;
+
+export const Overlay = styled.TouchableWithoutFeedback`
+    flex: 1;
+`;
+
+export const Touggle = styled(Animated.View)`
+    background-color: black;  
+    position: absolute;
 `;

@@ -2,9 +2,11 @@ import React from 'react';
 import faker from 'faker';
 import { useMemoOne } from 'use-memo-one';
 
-import { Scroll, Convertation, Avatar, ContactInfo, Row, Name, LastMessage, MessageDate, Offset } from './styles';
+import { Scroll, Offset } from './styles';
 
-export default function Conversations({ childScrollGesture }) {
+import Conversation from '../../components/conversation';
+
+export default function Conversations({ childScrollGesture, childScroll, opacity }) {
     const { fakeData } = useMemoOne(() => ({
         fakeData: new Array(20).fill(0).map(item => ({
             avatar: faker.image.avatar(),
@@ -17,18 +19,10 @@ export default function Conversations({ childScrollGesture }) {
     function renderConvertation() {
         const convertations = fakeData.map(({ avatar, name, message, date }, index) => {
             return (
-                <Convertation key={index}>
-                    <>
-                        <Avatar source={{ uri: avatar }} />
-                        <ContactInfo>
-                            <Row>
-                                <Name>{name}</Name>
-                                <MessageDate>{date}</MessageDate>
-                            </Row>
-                            <LastMessage>{message}</LastMessage>
-                        </ContactInfo>
-                    </>
-                </Convertation>
+                <Conversation
+                    key={index}
+                    {...{ avatar, name, message, date, childScroll, index, opacity}}
+                />
             );
         });
 
