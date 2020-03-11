@@ -5,9 +5,12 @@ import Animated from 'react-native-reanimated';
 const { StatusBarManager: { HEIGHT } } = NativeModules;
 const { width } = Dimensions.get('window');
 
-export const Scroll = styled(Animated.ScrollView)`
+export const Scroll = styled(Animated.ScrollView).attrs({
+    contentContainerStyle: {
+        paddingTop: HEIGHT
+    }
+})`
     width: ${width}px;
-    padding-top: ${HEIGHT}px;
 `;
 
 export const Offset = styled.View`

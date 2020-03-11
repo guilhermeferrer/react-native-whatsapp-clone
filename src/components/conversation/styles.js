@@ -19,21 +19,17 @@ export const Container = styled(Touchable)`
     background-color: white;
 `;
 
-export const Card = styled.View`
+export const Card = styled.TouchableOpacity`
     width: 50px;
     height: 50px;
     overflow: hidden;
-    border-radius: 25px;
-    justify-content: center;
-    align-items: center;
+    border-radius: 25px; 
 `;
 
 export const Avatar = styled.Image`
-    position: absolute;
     width: 100%;
     height: 100%;
     resize-mode: contain;
-    margin-vertical: 10px;
 `;
 
 export const AnimatedAvatar = styled(Animated.Image)`
