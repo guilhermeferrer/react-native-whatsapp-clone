@@ -2,29 +2,27 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
-import { Container, Avatar, ContactInfo, Row, Name, LastMessage, MessageDate, Card } from './styles';
+import { Avatar, Card } from './styles';
 
 import { SharedElement } from 'react-navigation-shared-element';
+import BaseRow from '../base-row';
 
 function Conversation({ avatar, name, date, message, navigation }) {
 
     return (
-        <Container>
-            <>
+        <BaseRow
+            Children={
                 <Card onPress={() => navigation.navigate('ProfileModal', { avatar, name })}>
                     <SharedElement id={avatar} style={StyleSheet.absoluteFill}>
                         <Avatar source={{ uri: avatar }} />
                     </SharedElement>
+                    <Avatar style={StyleSheet.absoluteFill} source={{ uri: avatar }} />
                 </Card>
-                <ContactInfo>
-                    <Row>
-                        <Name>{name}</Name>
-                        <MessageDate>{date}</MessageDate>
-                    </Row>
-                    <LastMessage>{message}</LastMessage>
-                </ContactInfo>
-            </>
-        </Container>
+            }
+            mainText={name}
+            subTitle={message}
+            extraText={date}
+        />
     )
 }
 

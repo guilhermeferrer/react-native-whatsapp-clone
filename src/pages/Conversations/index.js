@@ -6,7 +6,7 @@ import { Scroll, Offset } from './styles';
 
 import Conversation from '../../components/conversation';
 
-export default function Conversations({ childScrollGesture, childScroll, opacity }) {
+export default function Conversations({ childScrollGesture }) {
     const { fakeData } = useMemoOne(() => ({
         fakeData: new Array(20).fill(0).map(item => ({
             avatar: faker.image.avatar(),
@@ -21,7 +21,7 @@ export default function Conversations({ childScrollGesture, childScroll, opacity
             return (
                 <Conversation
                     key={index}
-                    {...{ avatar, name, message, date, childScroll, index, opacity}}
+                    {...{ avatar, name, message, date, index}}
                 />
             );
         });

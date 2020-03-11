@@ -114,12 +114,3 @@ export const Page = styled.View`
     height: ${Dimensions.get('window').height}px;
     background-color: ${({ index }) => index === 2 ? 'blue' : 'red'};
 `;
-
-export const Overlay = styled.TouchableWithoutFeedback`
-    flex: 1;
-`;
-
-export const Touggle = styled(Animated.View)`
-    background-color: black;  
-    position: absolute;
-`;

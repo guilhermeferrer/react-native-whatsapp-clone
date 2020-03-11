@@ -11,7 +11,7 @@ const stack = createSharedElementStackNavigator({
     defaultNavigationOptions: {
         cardStyleInterpolator: ({ current: { progress } }) => {
             const opacity = progress.interpolate({
-                inputRange: [0, 1],
+                inputRange: [0.5, 1],
                 outputRange: [0, 1],
                 extrapolate: 'clamp'
             });

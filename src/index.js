@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { Dimensions, StatusBar, NativeModules } from 'react-native';
-import Animated, { useCode } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useMemoOne } from 'use-memo-one';
 
 import {
@@ -18,14 +18,12 @@ import {
     CameraIcon,
     Line,
     Page,
-    Bar,
-    Overlay,
-    Touggle
+    Bar
 } from './styles';
 
 import Camera from './pages/Camera';
 import Conversations from './pages/Conversations';
-import { setState } from 'expect/build/jestMatchersObject';
+import Status from './pages/Status';
 
 const { StatusBarManager: { HEIGHT } } = NativeModules;
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -35,11 +33,12 @@ export default function Home() {
 
     const AnimatedCameraIcon = Animated.createAnimatedComponent(CameraIcon);
 
-    const { Value, event, interpolate, Extrapolate, diffClamp, block, cond, lessOrEq, lessThan, call, color, greaterThan, greaterOrEq, set, and, eq } = Animated;
+    const { Value, event, interpolate, Extrapolate, diffClamp, block, cond, lessThan, color, set } = Animated;
 
-    const { scrollX, childScroll } = useMemoOne(() => ({
+    const { scrollX, childScroll, offsetHeader } = useMemoOne(() => ({
         scrollX: new Value(0),
-        childScroll: new Value(0)
+        childScroll: new Value(0),
+        offsetHeader: new Value(0)
     }), []);
 
     const opacity = new Value(0);
@@ -79,16 +78,16 @@ export default function Home() {
             [
                 interpolate(scrollX, {
                     inputRange: [0, 360],
-                    outputRange: [-106 - (HEIGHT), 0],
+                    outputRange: [-106 - (HEIGHT), offsetHeader],
                     extrapolate: Extrapolate.CLAMP
                 })
             ],
             [
-                interpolate(diffClamp(childScroll, 0, 57), {
+                set(offsetHeader, interpolate(diffClamp(childScroll, 0, 57), {
                     inputRange: [0, 57],
                     outputRange: [0, -57],
                     extrapolate: Extrapolate.CLAMP
-                })
+                }))
             ]
         )
     ]);
@@ -136,10 +135,8 @@ export default function Home() {
                 }}
             >
                 <Camera />
-                <Conversations
-                    {...{ childScrollGesture, childScroll, opacity }}
-                />
-                <Page />
+                <Conversations {...{ childScrollGesture }}/>
+                <Status {...{ childScrollGesture }}/>
                 <Page />
             </Animated.ScrollView>
             <Header
@@ -233,15 +230,6 @@ export default function Home() {
                     }))
                 }}
             />
-            <Overlay>
-                <Touggle
-                    style={{
-                        opacity,
-                        width,
-                        height
-                    }}
-                />
-            </Overlay>
             <StatusBar backgroundColor={'transparent'} translucent />
         </Container>
     );

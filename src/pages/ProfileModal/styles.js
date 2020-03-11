@@ -15,15 +15,15 @@ export const Container = styled(Animated.View)`
 
 export const Card = styled(Animated.View)`
     width: ${width-100}px;
-    height: 300px;
+    height: 250px;
     position: absolute;
-    z-index: 10;
+    z-index: 10; 
 `;
 
 export const Avatar = styled.Image`
     width: 100%;
-    height: 250px;
-    border-radius: 0;
+    height: 230px;
+    border-radius: 25px;
     resize-mode: contain;
 `;
 
