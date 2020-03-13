@@ -1,11 +1,15 @@
 import React from 'react';
 
-import { Container, Scroll, Divisor, DivisorText, Offset, Card, Column, Avatar, GreenCircle, Plus } from './styles';
-import BaseRow from '../../components/base-row';
+import { Container, Scroll, StatusIcon, Divisor, DivisorText, Offset, Card, Column, Avatar, GreenCircle, Plus, Test, Row } from './styles';
 import faker from 'faker';
 import { useMemoOne } from 'use-memo-one';
+import Svg, { Path, Circle } from 'react-native-svg';
+import BaseRow from '../../components/base-row';
 
 export default function Status({ childScrollGesture }) {
+    const size = 65;
+    const strokeWidth = 2;
+    const r = size / 2;
 
     const { avatar, fakeData } = useMemoOne(() => ({
         avatar: faker.image.avatar(),
@@ -18,11 +22,16 @@ export default function Status({ childScrollGesture }) {
 
     function renderRecentStatus() {
         return fakeData.map(item => (
-            <BaseRow
+            <Row
                 Children={
-                    <Card>
-                        <Avatar source={{ uri: item.avatar }} />
-                    </Card>
+                    <StatusIcon>
+                        <Svg width={size} height={size}>
+                            {renderCirclePart(Math.floor(Math.random() * 10))}
+                            <Card>
+                                <Avatar source={{ uri: item.avatar }} />
+                            </Card>
+                        </Svg>
+                    </StatusIcon>
                 }
                 mainText={item.name}
                 subTitle={item.date}
@@ -30,6 +39,52 @@ export default function Status({ childScrollGesture }) {
         ));
     }
 
+    function getSectorPath(x, y, outerDiameter, a1, a2) {
+        const degtorad = Math.PI / 180;
+        const halfOuterDiameter = outerDiameter / 2;
+        const cr = halfOuterDiameter - 5;
+        const cx1 = (Math.cos(degtorad * a2) * cr) + x;
+        const cy1 = (-Math.sin(degtorad * a2) * cr) + y;
+        const cx2 = (Math.cos(degtorad * a1) * cr) + x;
+        const cy2 = (-Math.sin(degtorad * a1) * cr) + y;
+
+        return `M${cx1} ${cy1} A${cr} ${cr} 0 0 1 ${cx2} ${cy2}`;
+        //return `M${x} ${y} ${cx1} ${cy1} A${cr} ${cr} 0 0 1 ${cx2} ${cy2}Z`;
+    }
+
+    function renderCirclePart(size) {
+        console.log(size);
+        let slice = 360 / size;
+        let x = false;
+        let y = 90;
+        let coords = [];
+
+        for (let i = 1; i <= size; i++) {
+            x = y;
+            y = x + slice;
+            coords.push({
+                x: x > 360 ? x - 360 + 5 : x + 5,
+                y: y > 360 ? y - 360 - 5 : y - 5
+            });
+        }
+
+        if (size === 1) {
+            coords = [{ x: 0, y: 180 }, { x: 180, y: 360}];
+        }
+
+        const circle = coords.map(coord => {
+            return (
+                <Path
+                    stroke="#c4c4c4"
+                    fill="none"
+                    d={getSectorPath(r, r, r * 2, coord.x, coord.y)}
+                    strokeLinecap={"round"}
+                    {...{ strokeWidth }}
+                />
+            )
+        });
+        return circle;
+    }
 
     return (
         <Container>

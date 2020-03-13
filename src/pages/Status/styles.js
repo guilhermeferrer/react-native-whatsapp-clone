@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Dimensions } from 'react-native';
 import Animated from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import BaseRow from '../../components/base-row';
 
 const { width, height } = Dimensions.get('window');
 
@@ -16,22 +17,32 @@ export const Scroll = styled(Animated.ScrollView).attrs({
 
 `;
 
+export const Row = styled(BaseRow)`
+    position: absolute;
+`;
+
+export const StatusIcon = styled.View`
+
+`;
+
 export const Column = styled.TouchableOpacity`
     width: 55px;
     height: 55px;
 `;
 
 export const Card = styled(Column)`
-    width: 55px;
-    height: 55px;
+    width: 100%;
+    height: 100%;
     border-radius: 28px;
     overflow: hidden;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const Avatar = styled.Image`
-    width: 55px;
-    height: 55px;
-    border-radius: 28px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
     resize-mode: contain;
 `;
 
