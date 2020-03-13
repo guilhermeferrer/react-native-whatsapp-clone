@@ -4,7 +4,7 @@ import Animated from 'react-native-reanimated';
 
 import { SharedElement } from 'react-navigation-shared-element';
 
-import { Container, Avatar, ContactInfo, Row, Name, Card } from './styles';
+import { Container, Avatar, ContactInfo, Row, Name, Card, Icon, Title } from './styles';
 
 
 function ProfileModal({ navigation }) {
@@ -27,9 +27,15 @@ function ProfileModal({ navigation }) {
                     </SharedElement>
                     <ContactInfo>
                         <Row>
-                            <Name>{name}</Name>
+                            <Icon outlined name={"chat"} />
+                            <Icon outlined name={"phone"} />
+                            <Icon outlined name={"videocam"} />
+                            <Icon outlined name={"info"} />
                         </Row>
                     </ContactInfo>
+                    <Title>
+                        <Name>{name}</Name>
+                    </Title>
                 </Card>
                 <TouchableOpacity style={StyleSheet.absoluteFillObject} onPress={() => navigation.goBack()} activeOpacity={1}>
                     <></>

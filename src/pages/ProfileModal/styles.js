@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Dimensions, TouchableOpacity} from 'react-native';
-import Touchable from 'react-native-platform-touchable';
+import { Dimensions, TouchableOpacity } from 'react-native';
+import MIcon from 'react-native-vector-icons/MaterialIcons';
 import Animated from 'react-native-reanimated';
 
 const { width, height } = Dimensions.get('screen');
@@ -14,7 +14,7 @@ export const Container = styled(Animated.View)`
 `;
 
 export const Card = styled(Animated.View)`
-    width: ${width-100}px;
+    width: ${width - 100}px;
     height: 250px;
     position: absolute;
     z-index: 10; 
@@ -28,8 +28,7 @@ export const Avatar = styled.Image`
 `;
 
 export const ContactInfo = styled.View`
-    flex: 1;
-    padding: 20px 10px;
+    height: 50px;
     border-bottom-width: 1px;
     border-color: rgba(150, 150, 150, .2);
     justify-content: center;
@@ -39,10 +38,20 @@ export const ContactInfo = styled.View`
 
 export const Row = styled.View`
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+`;
+export const Title = styled.View`
+    background-color: white;
+    opacity: 0.5;
+    position: absolute;
 `;
 
 export const Name = styled.Text`
     font-size: 16px;
+`;
+
+export const Icon = styled(MIcon)`
+    font-size: 22px;
+    color: #128C7E;
 `;

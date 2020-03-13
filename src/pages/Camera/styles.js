@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Animated from 'react-native-reanimated';
 
 const { width, height } = Dimensions.get('window');
 
@@ -25,12 +26,21 @@ export const CameraActions = styled.View`
     padding: 10px 0;
 `;
 
-export const Button = styled.View`
+export const Button = styled(Animated.View)`
     width: 70px;
     height: 70px;
     border-radius: 35px;
     border-width: 2px;
     border-color: white;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const Circle = styled(Animated.View)`
+    width: 90%;
+    height: 90%;
+    border-radius: 50px;
+    background-color: red;
 `;
 
 export const HelpText = styled.Text`

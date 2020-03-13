@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Container, Scroll, StatusIcon, Divisor, DivisorText, Offset, Card, Column, Avatar, GreenCircle, Plus, Test, Row } from './styles';
+import { Container, Scroll, StatusIcon, Divisor, DivisorText, Offset, Card, Column, Avatar, GreenCircle, Plus, Row } from './styles';
 import faker from 'faker';
 import { useMemoOne } from 'use-memo-one';
-import Svg, { Path, Circle } from 'react-native-svg';
+import Svg, { Path } from 'react-native-svg';
 import BaseRow from '../../components/base-row';
 
 export default function Status({ childScrollGesture }) {
@@ -26,7 +26,7 @@ export default function Status({ childScrollGesture }) {
                 Children={
                     <StatusIcon>
                         <Svg width={size} height={size}>
-                            {renderCirclePart(Math.floor(Math.random() * 10))}
+                            {renderCirclePart(Math.ceil(Math.random() * 10))}
                             <Card>
                                 <Avatar source={{ uri: item.avatar }} />
                             </Card>
@@ -53,7 +53,6 @@ export default function Status({ childScrollGesture }) {
     }
 
     function renderCirclePart(size) {
-        console.log(size);
         let slice = 360 / size;
         let x = false;
         let y = 90;

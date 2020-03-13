@@ -13,9 +13,7 @@ export const Container = styled.View`
 
 export const Scroll = styled(Animated.ScrollView).attrs({
     
-})`
-
-`;
+})``;
 
 export const Row = styled(BaseRow)`
     position: absolute;
